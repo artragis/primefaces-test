@@ -8,13 +8,26 @@
     <h:head>
         <title>PrimeFaces Test</title>
         <h:outputScript name="test.js" />
+        <h:outputStylesheet library="css" value="primeicons.css"/>
+
     </h:head>
     <h:body>
 
-        <h1>#{testView.string}</h1>
-        <h:form id="frmTest">
-            
-        </h:form>
+        <h1>Test badge update</h1>
+        <p:outputPanel>
 
+            <h:form id="notificationTree">
+            <p:commandLink id="notifBell" global="false" update="notificationTree">
+                <p:badge severity="#{testView.severity}" value="#{testView.numberOfNotif}" id="badge">
+                    <h:outputText styleClass="pi pi-calendar" style="font-size: 2rem"/>
+                </p:badge>
+
+            </p:commandLink>
+
+            <p:poll listener="#{testView.updateData}" update="badge" interval="1" form="notificationTree"
+                    async="false"/>
+        </h:form>
+        </p:outputPanel>
     </h:body>
+
 </html>
